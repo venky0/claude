@@ -19,7 +19,7 @@ The source is a flattened 827 × 1902 px WebP image. This folder rebuilds it as 
   - "MSIL SOLAR" in Montserrat Bold
   - the metallic gold rule (gradient)
 - `Photo` (raster): the solar water heater scene. The MSIL logo on the tank is printed on the product, so it stays part of the photo.
-- `Tagline` (live text): "Our Energy / Tomorrow" in Source Sans 3 SemiBold Italic, with a soft drop shadow (an SVG filter; if Illustrator shows it as "SVG Filters", replace it with **Effect › Stylize › Drop Shadow**).
+- `Tagline` (live text): "Our Energy / Tomorrow" in Source Sans 3 SemiBold Italic, with a soft drop shadow. The shadow is a separate blurred black copy in the `Tagline_shadow` layer, so the tagline stays live text in PDFs. In Illustrator you can delete that layer and use **Effect › Stylize › Drop Shadow** on the tagline instead.
 
 ## Before printing
 

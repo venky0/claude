@@ -37,6 +37,11 @@ def text(id_, x, y, body, family, ps, weight, size, fit, extra=''):
             f'font-size="{size:.2f}" fill="#FFFFFF" data-fit="{fit}"{extra}>{body}</text>')
 
 
+tagline = (text('tagline-1', 70, 1692.5, 'Our Energy', 'Source Sans 3', 'SourceSans3-SemiBoldItalic', 600, 80, 440,
+                ' font-style="italic"') + '\n    ' +
+           text('tagline-2', 75, 1784, 'Tomorrow', 'Source Sans 3', 'SourceSans3-SemiBoldItalic', 600, 80, 425,
+                ' font-style="italic"'))
+
 svg = f'''<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      width="{W}pt" height="{H}pt" viewBox="0 0 {W} {H}">
@@ -51,10 +56,8 @@ svg = f'''<?xml version="1.0" encoding="UTF-8"?>
       <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.75" stop-color="#FFFFFF" stop-opacity="0.18"/>
       <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
-    <filter id="taglineShadow" x="-5%" y="-20%" width="115%" height="150%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/><feOffset dx="2" dy="3" result="b"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.55"/></feComponentTransfer>
-      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="shadowBlur" x="-5%" y="-20%" width="115%" height="150%">
+      <feGaussianBlur stdDeviation="2.5"/>
     </filter>
   </defs>
 
@@ -77,9 +80,11 @@ svg = f'''<?xml version="1.0" encoding="UTF-8"?>
     </g>
   </g>
 
-  <g id="Tagline" filter="url(#taglineShadow)">
-    {text('tagline-1', 70, 1692.5, 'Our Energy', 'Source Sans 3', 'SourceSans3-SemiBoldItalic', 600, 80, 440, ' font-style="italic"')}
-    {text('tagline-2', 75, 1784, 'Tomorrow', 'Source Sans 3', 'SourceSans3-SemiBoldItalic', 600, 80, 425, ' font-style="italic"')}
+  <g id="Tagline_shadow" transform="translate(2 3)" filter="url(#shadowBlur)" opacity="0.55">
+    {tagline.replace('fill="#FFFFFF"', 'fill="#000000"').replace('id="tagline-', 'id="shadow-tagline-').replace(' data-fit=', ' data-nofit=')}
+  </g>
+  <g id="Tagline">
+    {tagline}
   </g>
 </svg>
 '''

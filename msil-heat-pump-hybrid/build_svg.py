@@ -105,12 +105,14 @@ def kannada_title(n):
     for i, ((line, base, color), uy, uw) in enumerate(zip(k['lines'], k['uline'], k['uw'])):
         key = f'{n}:kn-{i + 1}'
         w = FIT['width'].get(key, len(line) * k['size'] * 0.5)
-        filt = ' filter="url(#textShadow)"' if n == 3 else ''
-        out.append(f'<g id="title-line-{i + 1}"{filt}>'
-                   f'<text x="{k["cx"]}" y="{base}" text-anchor="middle" {KANNADA} font-size="{k["size"]}" '
-                   f'fill="{color}" data-key="{key}" data-measure="1">{line}</text>'
-                   f'<rect x="{k["cx"] - w / 2:.2f}" y="{uy - uw / 2:.2f}" width="{w:.2f}" height="{uw}" fill="{color}"/>'
-                   f'</g>')
+        line_svg = (f'<text x="{k["cx"]}" y="{base}" text-anchor="middle" {KANNADA} font-size="{k["size"]}" '
+                    f'fill="{color}" data-key="{key}" data-measure="1">{line}</text>'
+                    f'<rect x="{k["cx"] - w / 2:.2f}" y="{uy - uw / 2:.2f}" width="{w:.2f}" height="{uw}" fill="{color}"/>')
+        if n == 3:  # PowerPoint text shadow, kept as a separate blurred copy so the text itself stays live in PDFs
+            shadow = line_svg.replace(f'fill="{color}"', 'fill="#000000"').replace(' data-measure="1"', '')
+            out.append(f'<g id="title-line-{i + 1}-shadow" transform="translate(0.9 1.1)" filter="url(#shadowBlur)" '
+                       f'opacity="0.35">{shadow}</g>')
+        out.append(f'<g id="title-line-{i + 1}">{line_svg}</g>')
     out.append('</g>')
     return ''.join(out)
 
@@ -121,10 +123,8 @@ DEFS = '''<defs>
       <feComponentTransfer><feFuncA type="linear" slope="0.38"/></feComponentTransfer>
       <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="textShadow" x="-5%" y="-30%" width="110%" height="160%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/><feOffset dx="0.9" dy="1.1" result="b"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
-      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="shadowBlur" x="-5%" y="-30%" width="110%" height="160%">
+      <feGaussianBlur stdDeviation="0.5"/>
     </filter>
   </defs>'''
 

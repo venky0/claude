@@ -42,4 +42,4 @@ Every Kannada line is live text set in **Noto Sans Kannada**, a Google font. The
    - Montserrat (Bold, ExtraBold)
    - Arimo (Regular, Bold), a metric match for the Arial footer
 2. **Turn on Indic shaping.** Select all Kannada text and choose **Adobe World-Ready Paragraph Composer** from the Paragraph panel menu. Without it, conjuncts such as ಸ್ಪ್ರಿ, ವ್ಯಾ and ಬ್ರಿ will break apart.
-3. **Shadows.** The white title boxes and the slide 3 heading keep their PowerPoint drop shadows as SVG filters. If Illustrator shows them as "SVG Filters", replace them with **Effect › Stylize › Drop Shadow**.
+3. **Shadows.** The white title boxes keep their PowerPoint drop shadow as an SVG filter. If Illustrator shows it as "SVG Filters", replace it with **Effect › Stylize › Drop Shadow**. The slide 3 heading shadow is a separate blurred copy (`title-line-1-shadow`), so the heading stays live text in PDFs.

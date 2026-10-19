@@ -8,10 +8,8 @@
       <feComponentTransfer><feFuncA type="linear" slope="0.38"/></feComponentTransfer>
       <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="textShadow" x="-5%" y="-30%" width="110%" height="160%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/><feOffset dx="0.9" dy="1.1" result="b"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
-      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="shadowBlur" x="-5%" y="-30%" width="110%" height="160%">
+      <feGaussianBlur stdDeviation="0.5"/>
     </filter>
   </defs>
   <rect id="slide-bg" width="720" height="540" fill="#FFFFFF"/>
